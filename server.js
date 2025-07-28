@@ -10,9 +10,7 @@ const app = express();
 // Middleware
 // app.use(cors({ origin: "*" }));
 app.use(cors({
-  origin: [
-    process.env.HOST
-  ],
+  origin: ['*'],
   methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
