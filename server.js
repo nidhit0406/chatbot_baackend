@@ -10,10 +10,10 @@ const app = express();
 // Middleware
 // app.use(cors({ origin: "*" }));
 app.use(cors({
-  origin: ['*'],
+  origin: ['https://chatbot-iota-rose.vercel.app/'],
   methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
-  // credentials: true
+  credentials: true
 }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
