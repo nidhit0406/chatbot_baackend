@@ -103,54 +103,65 @@
   if (window.ChatbotLoaded) return;
   window.ChatbotLoaded = true;
 
-  // Create iframe
+  // ======= LUXURY IFRAME ======= //
   const iframe = document.createElement("iframe");
   iframe.src = "https://chatbot-iota-rose.vercel.app";
   iframe.style.cssText = `
     position: fixed;
-    bottom: 80px;
-    right: 20px;
-    width: 380px;
+    bottom: 90px;
+    right: 25px;
+    width: 400px;
     height: 0;
     border: none;
-    border-radius: 16px;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    border-radius: 24px;
+    box-shadow: 
+      0 12px 40px rgba(0,0,0,0.15),
+      0 0 0 1px rgba(255,255,255,0.1) inset;
     z-index: 99999;
     opacity: 0;
-    transform: translateY(20px) scale(0.95);
+    transform: translateY(30px) scale(0.9);
     transform-origin: bottom right;
     transition: 
-      height 0.3s cubic-bezier(0.22, 1, 0.36, 1),
-      opacity 0.25s ease-out,
-      transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-    background: white;
+      height 0.4s cubic-bezier(0.33, 1, 0.68, 1),
+      opacity 0.3s ease-out,
+      transform 0.4s cubic-bezier(0.33, 1, 0.68, 1);
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
     overflow: hidden;
     display: none;
+    backdrop-filter: blur(10px);
   `;
   document.body.appendChild(iframe);
 
-  // Create toggle button
+  // ======= PREMIUM TOGGLE BUTTON ======= //
   const btn = document.createElement('button');
   btn.innerHTML = `
     <span class="chatbot-icon">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 13.5997 2.37562 15.1116 3.04346 16.4525C3.22094 16.8088 3.28001 17.2161 3.17712 17.6006L2.58151 19.8267C2.32295 20.793 3.20701 21.677 4.17335 21.4185L6.39939 20.8229C6.78393 20.72 7.19121 20.7791 7.54753 20.9565C8.88837 21.6244 10.4003 22 12 22Z" fill="white"></path>
-        <path d="M15 12C15 12.5523 15.4477 13 16 13C16.5523 13 17 12.5523 17 12C17 11.4477 16.5523 11 16 11C15.4477 11 15 11.4477 15 12Z" fill="currentColor"></path>
-        <path d="M11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12Z" fill="currentColor"></path>
-        <path d="M7 12C7 12.5523 7.44772 13 8 13C8.55228 13 9 12.5523 9 12C9 11.4477 8.55228 11 8 11C7.44772 11 7 11.4477 7 12Z" fill="currentColor"></path>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12c0 1.6.376 3.112 1.043 4.453.178.356.237.764.134 1.148l-.596 2.226c-.258.966.626 1.85 1.592 1.592l2.226-.596c.384-.103.792-.044 1.148.134C8.888 21.624 10.4 22 12 22z" 
+              fill="url(#btn-gradient)"/>
+        <circle cx="8" cy="12" r="1" fill="white"/>
+        <circle cx="12" cy="12" r="1" fill="white"/>
+        <circle cx="16" cy="12" r="1" fill="white"/>
+        <defs>
+          <linearGradient id="btn-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#667eea"/>
+            <stop offset="100%" stop-color="#764ba2"/>
+          </linearGradient>
+        </defs>
       </svg>
     </span>
     <span class="chatbot-pulse"></span>
+    <span class="chatbot-notification-badge"></span>
   `;
   
   btn.style.cssText = `
     position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 60px;
-    height: 60px;
+    bottom: 25px;
+    right: 25px;
+    width: 68px;
+    height: 68px;
     padding: 0;
-    background: linear-gradient(135deg, #5c6ac4 0%, #4a58b3 100%);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     border: none;
     border-radius: 50%;
@@ -159,121 +170,156 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 20px rgba(92,106,196,0.3);
-    transition: 
-      all 0.3s cubic-bezier(0.22, 1, 0.36, 1),
-      transform 0.2s ease;
+    box-shadow: 
+      0 6px 30px rgba(102, 126, 234, 0.4),
+      0 0 0 1px rgba(255,255,255,0.2) inset;
+    transition: all 0.4s cubic-bezier(0.33, 1, 0.68, 1);
     outline: none;
+    border: 2px solid rgba(255,255,255,0.15);
   `;
 
-  // Add styles for the icon and pulse effect
+  // ======= ENHANCED STYLES ======= //
   const style = document.createElement('style');
   style.textContent = `
+    /* Icon animation */
     .chatbot-icon {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+      transition: transform 0.4s cubic-bezier(0.33, 1, 0.68, 1);
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
     }
+    
+    /* Pulse effect */
     .chatbot-pulse {
       position: absolute;
       width: 100%;
       height: 100%;
-      background: rgba(92,106,196,0.4);
+      background: rgba(255,255,255,0.3);
       border-radius: 50%;
       opacity: 0;
       transform: scale(1);
-      animation: none;
+      pointer-events: none;
     }
+    
+    /* Notification badge */
+    .chatbot-notification-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 12px;
+      height: 12px;
+      background: #ff5e5e;
+      border-radius: 50%;
+      border: 2px solid #764ba2;
+      opacity: 0;
+      transform: scale(0.5);
+      transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    
+    /* Animations */
     @keyframes pulse {
-      0% {
-        transform: scale(1);
-        opacity: 1;
-      }
-      100% {
-        transform: scale(1.5);
-        opacity: 0;
-      }
+      0% { transform: scale(1); opacity: 0.8; }
+      100% { transform: scale(1.8); opacity: 0; }
     }
-    .chatbot-notification .chatbot-pulse {
-      animation: pulse 1.5s infinite;
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    
+    .has-notification .chatbot-notification-badge {
+      opacity: 1;
+      transform: scale(1);
+    }
+    
+    .is-floating {
+      animation: float 3s ease-in-out infinite;
     }
   `;
   document.head.appendChild(style);
 
+  // ======= INTERACTIONS ======= //
   let isOpen = false;
   let hasNotification = false;
 
-  // Toggle function
   const toggleChat = () => {
     isOpen = !isOpen;
     
     if (isOpen) {
-      // Open chat
+      // Open animation
       iframe.style.display = 'block';
       setTimeout(() => {
-        iframe.style.height = 'min(600px, 80vh)';
+        iframe.style.height = 'min(650px, 85vh)';
         iframe.style.opacity = '1';
         iframe.style.transform = 'translateY(0) scale(1)';
       }, 10);
       
-      btn.classList.remove('chatbot-notification');
-      btn.style.transform = 'translateY(-5px)';
-      btn.style.background = 'linear-gradient(135deg, #4a58b3 0%, #3a4799 100%)';
+      btn.classList.remove('has-notification');
+      btn.style.transform = 'translateY(-8px)';
+      btn.style.background = 'linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%)';
+      btn.querySelector('.chatbot-icon').style.transform = 'rotate(1turn)';
       
-      // Animate icon
-      btn.querySelector('.chatbot-icon').style.transform = 'rotate(180deg)';
-      
-      // Remove notification if it exists
       hasNotification = false;
     } else {
-      // Close chat
+      // Close animation
       iframe.style.height = '0';
       iframe.style.opacity = '0';
-      iframe.style.transform = 'translateY(20px) scale(0.95)';
+      iframe.style.transform = 'translateY(30px) scale(0.9)';
       
-      btn.style.background = 'linear-gradient(135deg, #5c6ac4 0%, #4a58b3 100%)';
-      btn.querySelector('.chatbot-icon').style.transform = 'rotate(0deg)';
+      btn.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+      btn.querySelector('.chatbot-icon').style.transform = 'rotate(0)';
       
       setTimeout(() => {
-        if (!isOpen) {
-          iframe.style.display = 'none';
-        }
-      }, 300);
+        if (!isOpen) iframe.style.display = 'none';
+      }, 400);
     }
   };
 
   btn.onclick = toggleChat;
 
-  // Hover effects
+  // ======= HOVER EFFECTS ======= //
   btn.addEventListener('mouseenter', () => {
     if (!isOpen) {
-      btn.style.transform = 'translateY(-5px) scale(1.05)';
-      btn.style.boxShadow = '0 6px 25px rgba(92,106,196,0.4)';
+      btn.style.transform = 'translateY(-8px) scale(1.08)';
+      btn.style.boxShadow = '0 12px 40px rgba(102, 126, 234, 0.6)';
+      btn.classList.add('is-floating');
     }
   });
   
   btn.addEventListener('mouseleave', () => {
     if (!isOpen) {
       btn.style.transform = 'translateY(0) scale(1)';
-      btn.style.boxShadow = '0 4px 20px rgba(92,106,196,0.3)';
+      btn.style.boxShadow = '0 6px 30px rgba(102, 126, 234, 0.4)';
+      btn.classList.remove('is-floating');
     }
   });
 
-  // Add notification effect (you can trigger this from your iframe messages)
+  // ======= NOTIFICATION SYSTEM ======= //
   window.showChatbotNotification = () => {
     if (!isOpen && !hasNotification) {
       hasNotification = true;
-      btn.classList.add('chatbot-notification');
+      btn.classList.add('has-notification');
+      
+      // Add temporary pulse effect
+      const pulse = btn.querySelector('.chatbot-pulse');
+      pulse.style.animation = 'pulse 1.5s ease-out';
+      pulse.addEventListener('animationend', () => {
+        pulse.style.animation = '';
+      });
     }
   };
 
   document.body.appendChild(btn);
 
-  // Close when clicking outside
+  // ======= CLICK OUTSIDE TO CLOSE ======= //
   document.addEventListener('click', (e) => {
     if (isOpen && !iframe.contains(e.target) && e.target !== btn && !btn.contains(e.target)) {
       toggleChat();
     }
   });
+
+  // ======= INITIAL FLOAT ANIMATION ======= //
+  setTimeout(() => {
+    btn.classList.add('is-floating');
+  }, 1000);
 })();
